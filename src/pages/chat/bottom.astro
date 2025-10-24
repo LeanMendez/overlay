@@ -1,0 +1,20 @@
+---
+import ChatOverlay from '../../components/overlays/ChatOverlay';
+import '../../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Chat Overlay - Bottom</title>
+  </head>
+  <body>
+    <ChatOverlay
+      client:load
+      position="bottom"
+      maxMessages={8}
+      messageLifetime={15000}
+    />
+  </body>
+</html>

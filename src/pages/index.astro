@@ -1,5 +1,5 @@
 ---
-
+import '../styles/global.css';
 ---
 
 <html lang="en">
@@ -8,9 +8,82 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Stream Overlays</title>
+		<style>
+			body {
+				background: #0a0a0a;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 2rem;
+			}
+			.overlay-link {
+				display: block;
+				padding: 1.5rem 2rem;
+				background: rgba(255, 255, 255, 0.05);
+				border: 2px solid rgba(255, 255, 255, 0.2);
+				color: white;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				font-size: 1.25rem;
+				font-weight: 300;
+			}
+			.overlay-link:hover {
+				background: rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.5);
+				transform: translateX(8px);
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="max-w-2xl w-full">
+			<h1 class="text-white text-4xl font-light mb-8 text-center">Stream Overlays</h1>
+			<p class="text-white/60 text-center mb-8">Overlays minimalistas con estética futurista para tu stream</p>
+			<div class="flex flex-col gap-4">
+				<a href="/camera-frame" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Camera Frame</span>
+						<span class="text-sm text-white/50">5 variantes</span>
+					</div>
+				</a>
+				<a href="/alert-box" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Alert Box</span>
+						<span class="text-sm text-white/50">5 tipos de alertas</span>
+					</div>
+				</a>
+				<a href="/stream-screens" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Stream Screens</span>
+						<span class="text-sm text-white/50">Starting, BRB & Ending</span>
+					</div>
+				</a>
+				<a href="/chat-overlay" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Chat Overlay</span>
+						<span class="text-sm text-white/50">Glassmorphism</span>
+					</div>
+				</a>
+				<a href="/goal-tracker" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Goal Tracker</span>
+						<span class="text-sm text-white/50">Progress & Celebration</span>
+					</div>
+				</a>
+				<a href="/goal-tracker-compact" class="overlay-link">
+					<div class="flex items-center justify-between">
+						<span>Goal Tracker Compact</span>
+						<span class="text-sm text-white/50">Para gameplay</span>
+					</div>
+				</a>
+			</div>
+
+			<div class="mt-8 pt-8 border-t border-white/20 text-center">
+				<p class="text-white/40 text-sm">
+					Elementos espaciales • Versiones EN/ES • Animaciones fluidas
+				</p>
+			</div>
+		</div>
 	</body>
 </html>

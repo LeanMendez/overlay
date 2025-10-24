@@ -1,0 +1,53 @@
+---
+import GoalTrackerTester from '../components/overlays/GoalTrackerTester';
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Goal Tracker Preview</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        min-height: 100vh;
+        overflow: hidden;
+        /* Sample background to test glassmorphism */
+        background-image:
+          radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+          radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+      }
+    </style>
+  </head>
+  <body>
+    <GoalTrackerTester client:load />
+
+    <!-- Info panel -->
+    <div class="fixed top-8 left-8 bg-black/80 border border-white/20 p-4 max-w-sm backdrop-blur-sm pointer-events-auto">
+      <h1 class="text-white text-lg font-bold mb-2">Goal Tracker Preview</h1>
+      <p class="text-white/70 text-sm mb-3">
+        Seguimiento de objetivos con barra de progreso animada y celebración al completar
+      </p>
+      <div class="space-y-2 text-xs text-white/60">
+        <div class="flex items-start gap-2">
+          <span class="text-white">📊</span>
+          <span>Barra de progreso con marcadores</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-white">🔢</span>
+          <span>Números animados al cambiar</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-white">🎉</span>
+          <span>Celebración con confetti al completar</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-white">✨</span>
+          <span>Efecto glassmorphism integrado</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

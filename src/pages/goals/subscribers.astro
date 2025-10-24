@@ -1,0 +1,22 @@
+---
+import GoalTracker from '../../components/overlays/GoalTracker';
+import '../../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Subscribers Goal</title>
+  </head>
+  <body>
+    <GoalTracker
+      client:load
+      goalType="subscribers"
+      current={42}
+      target={100}
+      position="top-right"
+      showPercentage={true}
+    />
+  </body>
+</html>

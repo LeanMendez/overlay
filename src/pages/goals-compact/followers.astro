@@ -1,0 +1,23 @@
+---
+import '../../styles/global.css';
+import GoalTrackerCompact from '../../components/overlays/GoalTrackerCompact';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Followers Goal - Compact</title>
+  </head>
+  <body>
+    <GoalTrackerCompact
+      client:load
+      goalType="followers"
+      current={742}
+      target={1000}
+      position="top-center"
+      showPercentage={false}
+    />
+  </body>
+</html>

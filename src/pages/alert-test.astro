@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Alert Test - Simple</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-black/90 border-2 border-white p-6 z-[100]">
+      <h2 class="text-white text-xl mb-4 text-center">Simple Alert Test</h2>
+      <button
+        id="testBtn"
+        class="px-6 py-3 bg-white text-black font-bold hover:bg-white/90 cursor-pointer"
+      >
+        CLICK TO TEST ALERT
+      </button>
+      <div class="mt-4 text-white/60 text-sm text-center">
+        <div id="status">Ready</div>
+        <div class="text-xs mt-2">Check console for logs</div>
+      </div>
+    </div>
+
+    <script>
+      import { createElement } from 'react';
+      import { createRoot } from 'react-dom/client';
+      import AlertBoxSimple from '../components/overlays/AlertBoxSimple';
+
+      const root = createRoot(document.getElementById('root'));
+      let alertCount = 0;
+
+      document.getElementById('testBtn')?.addEventListener('click', () => {
+        console.log('🔵 Button clicked!');
+        const statusEl = document.getElementById('status');
+        if (statusEl) {
+          statusEl.textContent = `Alert #${++alertCount} triggered`;
+        }
+
+        root.render(
+          createElement(AlertBoxSimple, {
+            type: 'follow',
+            username: `TestUser${alertCount}`,
+            message: 'This is a test!',
+            duration: 5000,
+            onComplete: () => {
+              console.log('🟢 Alert completed');
+              if (statusEl) {
+                statusEl.textContent = 'Alert completed';
+              }
+              root.render(null);
+            }
+          })
+        );
+      });
+
+      console.log('🟣 Test page loaded');
+    </script>
+  </body>
+</html>

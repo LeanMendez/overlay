@@ -1,0 +1,247 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Stream Screens Preview</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        min-height: 100vh;
+        padding: 3rem;
+      }
+      .screen-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+      .screen-card:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+      }
+      .screen-preview {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: black;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+      .screen-preview iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        pointer-events: none;
+      }
+      .lang-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-white text-5xl font-light mb-3 text-center">Stream Screens</h1>
+      <p class="text-white/60 text-center mb-12">
+        Pantallas de transición con elementos espaciales y estética futurista
+      </p>
+
+      <!-- Starting Screens -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/50"></span>
+          Starting Screens
+          <span class="flex-1 h-0.5 bg-white/50"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- English -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Starting Screen</h3>
+              <span class="lang-badge text-white">EN</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/starting-en" title="Starting Screen English"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Pantalla de inicio con luna flotante, estrellas y anillos pulsantes
+            </p>
+            <a
+              href="/screens/starting-en"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Open Full Screen →
+            </a>
+          </div>
+
+          <!-- Spanish -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Pantalla de Inicio</h3>
+              <span class="lang-badge text-white">ES</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/starting-es" title="Starting Screen Spanish"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Starting screen with floating moon, stars and pulsing rings
+            </p>
+            <a
+              href="/screens/starting-es"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRB Screens -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/50"></span>
+          Be Right Back
+          <span class="flex-1 h-0.5 bg-white/50"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- English -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">BRB Screen</h3>
+              <span class="lang-badge text-white">EN</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/brb-en" title="BRB Screen English"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Planeta con anillos estilo Saturno y lunas orbitando
+            </p>
+            <a
+              href="/screens/brb-en"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Open Full Screen →
+            </a>
+          </div>
+
+          <!-- Spanish -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Pantalla Ya Vuelvo</h3>
+              <span class="lang-badge text-white">ES</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/brb-es" title="BRB Screen Spanish"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Saturn-like ringed planet with orbiting moons
+            </p>
+            <a
+              href="/screens/brb-es"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ending Screens -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/50"></span>
+          Ending Screens
+          <span class="flex-1 h-0.5 bg-white/50"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- English -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Ending Screen</h3>
+              <span class="lang-badge text-white">EN</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/ending-en" title="Ending Screen English"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Pantalla de despedida con estrellas fugaces y planetas distantes
+            </p>
+            <a
+              href="/screens/ending-en"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Open Full Screen →
+            </a>
+          </div>
+
+          <!-- Spanish -->
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Pantalla de Cierre</h3>
+              <span class="lang-badge text-white">ES</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/ending-es" title="Ending Screen Spanish"></iframe>
+            </div>
+            <p class="text-white/70 text-sm mb-3">
+              Farewell screen with shooting stars and distant planets
+            </p>
+            <a
+              href="/screens/ending-es"
+              target="_blank"
+              class="inline-block px-4 py-2 bg-white/10 border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
+            >
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage Instructions -->
+      <div class="bg-white/5 border border-white/20 p-8 rounded">
+        <h2 class="text-white text-2xl font-light mb-6">Cómo usar en OBS</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-white font-medium mb-3">Setup</h3>
+            <ol class="text-white/80 space-y-2 text-sm list-decimal list-inside">
+              <li>Crea una nueva escena en OBS para cada pantalla</li>
+              <li>Agrega una fuente de tipo "Browser"</li>
+              <li>Ancho: 1920, Alto: 1080</li>
+              <li>Copia la URL correspondiente (clic en "Open Full Screen")</li>
+              <li>Marca "Shutdown source when not visible"</li>
+            </ol>
+          </div>
+          <div>
+            <h3 class="text-white font-medium mb-3">Personalización</h3>
+            <p class="text-white/80 text-sm mb-3">
+              Puedes editar los archivos .astro en <code class="bg-white/10 px-1">/src/pages/screens/</code> para personalizar:
+            </p>
+            <ul class="text-white/70 space-y-1 text-sm list-disc list-inside">
+              <li>Tu nombre de streamer</li>
+              <li>Mensajes personalizados</li>
+              <li>Redes sociales</li>
+              <li>Horario de inicio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

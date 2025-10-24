@@ -1,0 +1,129 @@
+---
+import CameraFrame from '../components/overlays/CameraFrame';
+import '../styles/global.css';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Camera Frame Overlay</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="max-w-7xl mx-auto py-12 px-4">
+      <h1 class="text-white text-3xl font-light mb-2 text-center">Camera Frame Variants</h1>
+      <p class="text-white/60 text-center mb-12">Elige el formato que mejor se adapte a tu layout de stream</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-48 items-start">
+        <!-- Default 4:3 -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load variant="default" />
+          <div class="text-center">
+            <p class="text-white font-medium">Default</p>
+            <p class="text-white/60 text-sm">400×300 (4:3)</p>
+            <p class="text-white/40 text-xs mt-1">Clásico horizontal</p>
+          </div>
+        </div>
+
+        <!-- Wide 16:9 -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load variant="wide" />
+          <div class="text-center">
+            <p class="text-white font-medium">Wide</p>
+            <p class="text-white/60 text-sm">480×270 (16:9)</p>
+            <p class="text-white/40 text-xs mt-1">Pantalla ancha</p>
+          </div>
+        </div>
+
+        <!-- Portrait 9:16 -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load variant="portrait" />
+          <div class="text-center">
+            <p class="text-white font-medium">Portrait</p>
+            <p class="text-white/60 text-sm">270×480 (9:16)</p>
+            <p class="text-white/40 text-xs mt-1">Vertical para móvil</p>
+          </div>
+        </div>
+
+        <!-- Compact -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load variant="compact" />
+          <div class="text-center">
+            <p class="text-white font-medium">Compact</p>
+            <p class="text-white/60 text-sm">320×240 (4:3)</p>
+            <p class="text-white/40 text-xs mt-1">Pequeño y discreto</p>
+          </div>
+        </div>
+
+        <!-- Square -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load width={360} height={360} />
+          <div class="text-center">
+            <p class="text-white font-medium">Square</p>
+            <p class="text-white/60 text-sm">360×360 (1:1)</p>
+            <p class="text-white/40 text-xs mt-1">Formato cuadrado</p>
+          </div>
+        </div>
+
+        <!-- Custom vertical -->
+        <div class="flex flex-col items-center gap-4">
+          <CameraFrame client:load width={300} height={400} />
+          <div class="text-center">
+            <p class="text-white font-medium">Custom Vertical</p>
+            <p class="text-white/60 text-sm">300×400 (3:4)</p>
+            <p class="text-white/40 text-xs mt-1">Vertical personalizado</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Usage instructions -->
+      <div class="mt-16 max-w-3xl mx-auto bg-white/5 border border-white/10 p-6 rounded">
+        <h2 class="text-white text-xl font-light mb-4">Cómo usar en OBS</h2>
+        <ol class="text-white/80 space-y-2 text-sm list-decimal list-inside">
+          <li>Agrega una fuente de tipo <span class="text-white font-mono bg-white/10 px-1">Browser</span></li>
+          <li>Usa una de estas URLs según el formato que necesites:</li>
+        </ol>
+
+        <div class="mt-4 space-y-2 text-xs font-mono bg-black/30 p-4 rounded border border-white/10">
+          <div class="text-white/60">Default (4:3):</div>
+          <div class="text-white/90">http://localhost:4321/frames/default</div>
+
+          <div class="text-white/60 mt-3">Wide (16:9):</div>
+          <div class="text-white/90">http://localhost:4321/frames/wide</div>
+
+          <div class="text-white/60 mt-3">Portrait (9:16):</div>
+          <div class="text-white/90">http://localhost:4321/frames/portrait</div>
+
+          <div class="text-white/60 mt-3">Compact:</div>
+          <div class="text-white/90">http://localhost:4321/frames/compact</div>
+
+          <div class="text-white/60 mt-3">Square (1:1):</div>
+          <div class="text-white/90">http://localhost:4321/frames/square</div>
+        </div>
+
+        <ol start="3" class="mt-4 text-white/80 space-y-2 text-sm list-decimal list-inside">
+          <li>Ajusta el ancho y alto en OBS según el tamaño del frame</li>
+          <li>Marca <span class="text-white">"Shutdown source when not visible"</span> para optimizar</li>
+          <li>Posiciona tu cámara detrás del frame en OBS</li>
+        </ol>
+
+        <div class="mt-4 pt-4 border-t border-white/10">
+          <p class="text-white/60 text-sm">
+            💡 <span class="text-white">Tip:</span> Asegúrate de ejecutar <span class="font-mono bg-white/10 px-1">npm run dev</span> para que las URLs funcionen en OBS
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
