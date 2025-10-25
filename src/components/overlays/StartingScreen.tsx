@@ -2,27 +2,21 @@ import { useEffect, useState } from 'react';
 
 interface StartingScreenProps {
   language?: 'en' | 'es';
-  streamerName?: string;
-  startTime?: string;
 }
 
 const TEXTS = {
   en: {
     title: 'STARTING SOON',
     subtitle: 'Stream begins in a moment...',
-    welcome: 'Welcome to the stream',
   },
   es: {
     title: 'COMENZANDO PRONTO',
     subtitle: 'El stream comienza en un momento...',
-    welcome: 'Bienvenidos al stream',
   },
 };
 
 export default function StartingScreen({
   language = 'en',
-  streamerName,
-  startTime,
 }: StartingScreenProps) {
   const [mounted, setMounted] = useState(false);
   const text = TEXTS[language];
@@ -165,7 +159,7 @@ export default function StartingScreen({
 
         {/* Subtitle */}
         <p
-          className="text-2xl text-white/80 mb-16 tracking-wide"
+          className="text-2xl text-white/80 mb-12 tracking-wide"
           style={{
             animation: 'text-reveal 1s ease-out 0.6s both',
           }}
@@ -173,50 +167,67 @@ export default function StartingScreen({
           {text.subtitle}
         </p>
 
-        {/* Info section */}
+        {/* Decorative constellation pattern */}
         <div
-          className="relative border-2 border-white/30 p-8 bg-black/50 backdrop-blur-sm"
+          className="relative flex items-center justify-center gap-8 mb-8"
           style={{
             animation: 'text-reveal 1s ease-out 0.9s both',
           }}
         >
-          {/* Corner decorations */}
-          <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-white" />
-          <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-white" />
-          <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-white" />
-          <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-white" />
-
-          <div className="text-center space-y-4">
-            {streamerName && (
-              <div>
-                <div className="text-sm text-white/60 tracking-widest mb-1">
-                  {text.welcome.toUpperCase()}
-                </div>
-                <div className="text-3xl font-bold text-white tracking-wide">
-                  {streamerName}
-                </div>
-              </div>
-            )}
-
-            {startTime && (
-              <div className="pt-4 border-t border-white/20">
-                <div className="text-white/80 text-lg">{startTime}</div>
-              </div>
-            )}
-
-            {/* Loading indicator */}
-            <div className="flex items-center justify-center gap-2 pt-4">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="w-2 h-2 bg-white rounded-full"
-                  style={{
-                    animation: `twinkle 1.5s ease-in-out infinite ${i * 0.3}s`,
-                  }}
-                />
-              ))}
-            </div>
+          {/* Left ornament */}
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-3 h-3 bg-white/60 rounded-full" style={{ animation: 'twinkle 2s ease-in-out infinite' }} />
+            <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
+            <div className="w-2 h-2 bg-white/40 rounded-full rotate-45" />
           </div>
+
+          {/* Center ornament - hexagon pattern */}
+          <div className="relative w-24 h-24 flex items-center justify-center">
+            {/* Rotating hexagon */}
+            <div
+              className="absolute inset-0 border-2 border-white/30"
+              style={{
+                clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                animation: 'spin 20s linear infinite',
+              }}
+            />
+            {/* Inner hexagon */}
+            <div
+              className="absolute inset-4 border border-white/50"
+              style={{
+                clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+              }}
+            />
+            {/* Center dot */}
+            <div className="w-4 h-4 bg-white rounded-full" style={{ animation: 'pulse-ring 2s ease-in-out infinite' }} />
+          </div>
+
+          {/* Right ornament */}
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-3 h-3 bg-white/60 rounded-full" style={{ animation: 'twinkle 2s ease-in-out infinite 0.5s' }} />
+            <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent" />
+            <div className="w-2 h-2 bg-white/40 rounded-full rotate-45" />
+          </div>
+        </div>
+
+        {/* Loading indicator with connecting lines */}
+        <div
+          className="flex items-center justify-center gap-3"
+          style={{
+            animation: 'text-reveal 1s ease-out 1.2s both',
+          }}
+        >
+          {[0, 1, 2, 3, 4].map((i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div
+                className="w-2 h-2 bg-white rounded-full"
+                style={{
+                  animation: `twinkle 1.5s ease-in-out infinite ${i * 0.3}s`,
+                }}
+              />
+              {i < 4 && <div className="w-8 h-px bg-white/30" />}
+            </div>
+          ))}
         </div>
 
         {/* Bottom decorative line */}
