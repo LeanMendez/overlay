@@ -1,0 +1,113 @@
+---
+import '../../styles/global.css';
+import ChatOverlay from '../../components/overlays/ChatOverlay';
+import TwitchIntegration from '../../components/overlays/TwitchIntegration';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Overlay - Twitch Live</title>
+  </head>
+  <body>
+    <!-- Componente de integración con Twitch (invisible) -->
+    <div id="twitch-integration-container"></div>
+
+    <!-- Chat Overlay -->
+    <ChatOverlay client:load position="right" width={400} />
+
+    <script>
+      import { createRoot } from 'react-dom/client';
+      import { createElement } from 'react';
+      import TwitchIntegration from '../../components/overlays/TwitchIntegration';
+
+      // Cargar configuración de Twitch
+      const configJson = localStorage.getItem('twitchConfig');
+
+      if (!configJson) {
+        // Mostrar mensaje de error si no hay configuración
+        document.body.innerHTML = `
+          <div style="
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 2rem;
+          ">
+            <div>
+              <h1 style="font-size: 2rem; margin-bottom: 1rem;">⚠️ Twitch Not Configured</h1>
+              <p style="margin-bottom: 1.5rem; opacity: 0.8;">
+                Please configure your Twitch credentials first
+              </p>
+              <a href="/twitch-setup" style="
+                display: inline-block;
+                background: #9147ff;
+                color: white;
+                padding: 0.75rem 2rem;
+                text-decoration: none;
+                border-radius: 0.5rem;
+                font-weight: bold;
+              ">
+                Go to Setup
+              </a>
+            </div>
+          </div>
+        `;
+      } else {
+        // Parsear configuración
+        const config = JSON.parse(configJson);
+
+        // Renderizar componente de integración
+        const container = document.getElementById('twitch-integration-container');
+        if (container) {
+          const root = createRoot(container);
+          root.render(
+            createElement(TwitchIntegration, {
+              config,
+              autoConnect: true
+            })
+          );
+        }
+
+        // Mostrar indicador de conexión
+        const statusIndicator = document.createElement('div');
+        statusIndicator.id = 'connection-status';
+        statusIndicator.style.cssText = `
+          position: fixed;
+          top: 10px;
+          left: 10px;
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 8px 16px;
+          border-radius: 4px;
+          font-family: sans-serif;
+          font-size: 12px;
+          z-index: 10000;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        `;
+        statusIndicator.textContent = '🔄 Connecting to Twitch...';
+        document.body.appendChild(statusIndicator);
+
+        // Actualizar indicador cuando se conecte
+        setTimeout(() => {
+          statusIndicator.textContent = '✓ Connected to Twitch';
+          statusIndicator.style.borderColor = 'rgba(0, 255, 0, 0.5)';
+
+          // Ocultar después de 3 segundos
+          setTimeout(() => {
+            statusIndicator.style.opacity = '0';
+            statusIndicator.style.transition = 'opacity 1s';
+            setTimeout(() => statusIndicator.remove(), 1000);
+          }, 3000);
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

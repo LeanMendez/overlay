@@ -1,0 +1,267 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitch Integration Setup</title>
+  </head>
+  <body>
+    <div class="min-h-screen bg-gray-900 p-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-white mb-2">Twitch Integration Setup</h1>
+        <p class="text-white/60 mb-8">Configure your Twitch credentials to enable real-time chat and alerts</p>
+
+        <!-- Status -->
+        <div id="status" class="mb-6 p-4 rounded-lg bg-gray-800 border border-gray-700 hidden">
+          <p id="statusText" class="text-white"></p>
+        </div>
+
+        <!-- Setup Steps -->
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
+          <h2 class="text-2xl font-bold text-white mb-4">Setup Steps</h2>
+          <ol class="space-y-3 text-white/80">
+            <li class="flex gap-3">
+              <span class="text-white font-bold">1.</span>
+              <div>
+                <p>Go to <a href="https://dev.twitch.tv/console/apps" target="_blank" class="text-blue-400 hover:underline">Twitch Developer Console</a></p>
+                <p class="text-sm text-white/60">Create a new application if you don't have one</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-white font-bold">2.</span>
+              <div>
+                <p>Copy your <strong>Client ID</strong></p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-white font-bold">3.</span>
+              <div>
+                <p>Generate an <strong>Access Token</strong> with the following scopes:</p>
+                <ul class="list-disc list-inside text-sm text-white/60 mt-1">
+                  <li><code class="bg-gray-700 px-1 rounded">user:read:chat</code> - Read chat messages</li>
+                  <li><code class="bg-gray-700 px-1 rounded">channel:read:subscriptions</code> - Read subscriptions</li>
+                  <li><code class="bg-gray-700 px-1 rounded">bits:read</code> - Read bits/cheers</li>
+                  <li><code class="bg-gray-700 px-1 rounded">moderator:read:followers</code> - Read followers</li>
+                </ul>
+                <p class="text-sm text-white/60 mt-2">
+                  Use <a href="https://twitchtokengenerator.com/" target="_blank" class="text-blue-400 hover:underline">Twitch Token Generator</a> for easy token generation
+                </p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-white font-bold">4.</span>
+              <div>
+                <p>Get your <strong>Broadcaster ID</strong> (your user ID)</p>
+                <p class="text-sm text-white/60">Use <a href="https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/" target="_blank" class="text-blue-400 hover:underline">this tool</a> to convert your username to ID</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Configuration Form -->
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-6">
+          <h2 class="text-2xl font-bold text-white mb-4">Configuration</h2>
+
+          <form id="configForm" class="space-y-4">
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
+                Client ID
+              </label>
+              <input
+                type="text"
+                id="clientId"
+                placeholder="your_client_id_here"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+            </div>
+
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
+                Access Token
+              </label>
+              <input
+                type="password"
+                id="accessToken"
+                placeholder="your_access_token_here"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+              <p class="text-xs text-white/50 mt-1">This will be stored in localStorage (browser only)</p>
+            </div>
+
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
+                Broadcaster ID (Your User ID)
+              </label>
+              <input
+                type="text"
+                id="broadcasterId"
+                placeholder="123456789"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+            </div>
+
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
+                Moderator ID (Optional - needed for follow events)
+              </label>
+              <input
+                type="text"
+                id="moderatorId"
+                placeholder="123456789 (usually same as broadcaster ID)"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+              <p class="text-xs text-white/50 mt-1">Usually the same as your Broadcaster ID</p>
+            </div>
+
+            <div class="flex gap-4">
+              <button
+                type="submit"
+                class="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-6 rounded transition-colors"
+              >
+                Save Configuration
+              </button>
+              <button
+                type="button"
+                id="testBtn"
+                class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded transition-colors"
+              >
+                Test Connection
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Current Configuration -->
+        <div class="bg-gray-800 border border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold text-white mb-4">Current Configuration</h2>
+          <div id="currentConfig" class="text-white/60">
+            <p>No configuration saved yet</p>
+          </div>
+        </div>
+
+        <!-- Back to home -->
+        <div class="mt-8 text-center">
+          <a href="/" class="text-white/60 hover:text-white transition-colors">
+            ← Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Load saved configuration
+      function loadConfig() {
+        const config = localStorage.getItem('twitchConfig');
+        if (config) {
+          const parsed = JSON.parse(config);
+          (document.getElementById('clientId') as HTMLInputElement).value = parsed.clientId || '';
+          (document.getElementById('accessToken') as HTMLInputElement).value = parsed.accessToken || '';
+          (document.getElementById('broadcasterId') as HTMLInputElement).value = parsed.broadcasterId || '';
+          (document.getElementById('moderatorId') as HTMLInputElement).value = parsed.moderatorId || '';
+
+          updateCurrentConfig(parsed);
+        }
+      }
+
+      // Update current config display
+      function updateCurrentConfig(config: any) {
+        const div = document.getElementById('currentConfig')!;
+        div.innerHTML = `
+          <div class="space-y-2">
+            <p><strong>Client ID:</strong> ${config.clientId ? config.clientId.substring(0, 10) + '...' : 'Not set'}</p>
+            <p><strong>Access Token:</strong> ${config.accessToken ? '••••••••' : 'Not set'}</p>
+            <p><strong>Broadcaster ID:</strong> ${config.broadcasterId || 'Not set'}</p>
+            <p><strong>Moderator ID:</strong> ${config.moderatorId || 'Not set'}</p>
+          </div>
+        `;
+      }
+
+      // Show status message
+      function showStatus(message: string, type: 'success' | 'error' | 'info' = 'info') {
+        const statusDiv = document.getElementById('status')!;
+        const statusText = document.getElementById('statusText')!;
+
+        statusDiv.classList.remove('hidden', 'bg-green-800', 'bg-red-800', 'bg-blue-800', 'border-green-600', 'border-red-600', 'border-blue-600');
+
+        if (type === 'success') {
+          statusDiv.classList.add('bg-green-800', 'border-green-600');
+        } else if (type === 'error') {
+          statusDiv.classList.add('bg-red-800', 'border-red-600');
+        } else {
+          statusDiv.classList.add('bg-blue-800', 'border-blue-600');
+        }
+
+        statusText.textContent = message;
+
+        setTimeout(() => {
+          statusDiv.classList.add('hidden');
+        }, 5000);
+      }
+
+      // Save configuration
+      document.getElementById('configForm')!.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const config = {
+          clientId: (document.getElementById('clientId') as HTMLInputElement).value,
+          accessToken: (document.getElementById('accessToken') as HTMLInputElement).value,
+          broadcasterId: (document.getElementById('broadcasterId') as HTMLInputElement).value,
+          moderatorId: (document.getElementById('moderatorId') as HTMLInputElement).value,
+        };
+
+        if (!config.clientId || !config.accessToken || !config.broadcasterId) {
+          showStatus('Please fill in all required fields (Client ID, Access Token, and Broadcaster ID)', 'error');
+          return;
+        }
+
+        localStorage.setItem('twitchConfig', JSON.stringify(config));
+        updateCurrentConfig(config);
+        showStatus('Configuration saved successfully! You can now use the chat overlay with Twitch integration.', 'success');
+      });
+
+      // Test connection
+      document.getElementById('testBtn')!.addEventListener('click', async () => {
+        const config = localStorage.getItem('twitchConfig');
+        if (!config) {
+          showStatus('Please save configuration first', 'error');
+          return;
+        }
+
+        showStatus('Testing connection...', 'info');
+
+        const parsed = JSON.parse(config);
+
+        // Test API access
+        try {
+          const response = await fetch(`https://api.twitch.tv/helix/users?id=${parsed.broadcasterId}`, {
+            headers: {
+              'Client-ID': parsed.clientId,
+              'Authorization': `Bearer ${parsed.accessToken}`
+            }
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.data && data.data.length > 0) {
+              showStatus(`✓ Connection successful! Connected as: ${data.data[0].display_name}`, 'success');
+            } else {
+              showStatus('✓ API connection successful but could not fetch user info', 'success');
+            }
+          } else {
+            const error = await response.json();
+            showStatus(`✗ Connection failed: ${error.message || 'Invalid credentials'}`, 'error');
+          }
+        } catch (error: any) {
+          showStatus(`✗ Connection failed: ${error.message}`, 'error');
+        }
+      });
+
+      // Load config on page load
+      loadConfig();
+    </script>
+  </body>
+</html>
