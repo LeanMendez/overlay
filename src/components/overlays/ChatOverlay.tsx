@@ -14,6 +14,12 @@ export default function ChatOverlay({
     // Listen for new chat messages
     const handleNewMessage = (event: CustomEvent<ChatMessage>) => {
       const newMessage = event.detail;
+
+      console.log('📨 ChatOverlay received message:', newMessage);
+
+      // Force repaint for OBS Browser Source
+      document.body.style.transform = 'translateZ(0)';
+
       setMessages((prev) => {
         const updated = [...prev, newMessage];
         // Keep only the last N messages

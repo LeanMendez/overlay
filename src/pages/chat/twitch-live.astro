@@ -16,6 +16,19 @@ import TwitchIntegration from '../../components/overlays/TwitchIntegration';
         padding: 0;
         background: transparent !important;
         overflow: hidden;
+        /* Force hardware acceleration for OBS */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        will-change: transform;
+      }
+
+      /* Ensure React root renders properly in OBS */
+      #root, body > div {
+        width: 100%;
+        height: 100%;
+        position: relative;
       }
     </style>
   </head>
@@ -23,8 +36,10 @@ import TwitchIntegration from '../../components/overlays/TwitchIntegration';
     <!-- Componente de integración con Twitch (invisible) -->
     <div id="twitch-integration-container"></div>
 
-    <!-- Chat Overlay -->
-    <ChatOverlay client:load position="right" width={400} />
+    <!-- Chat Overlay - CENTERED FOR DEBUG -->
+    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+      <ChatOverlay client:load position="right" width={400} />
+    </div>
 
     <script>
       import { createRoot } from 'react-dom/client';
@@ -103,18 +118,32 @@ import TwitchIntegration from '../../components/overlays/TwitchIntegration';
         statusIndicator.textContent = '🔄 Connecting to Twitch...';
         document.body.appendChild(statusIndicator);
 
+        // Debug: Escuchar eventos de chat para verificar
+        let messageCount = 0;
+        window.addEventListener('chatMessage', (event) => {
+          messageCount++;
+          console.log('✅ Chat message event received!', messageCount, event);
+          statusIndicator.textContent = `✓ Connected | ${messageCount} msgs`;
+        });
+
         // Actualizar indicador cuando se conecte
         setTimeout(() => {
-          statusIndicator.textContent = '✓ Connected to Twitch';
+          statusIndicator.textContent = '✓ Connected to Twitch - Waiting for messages...';
           statusIndicator.style.borderColor = 'rgba(0, 255, 0, 0.5)';
 
-          // Ocultar después de 3 segundos
-          setTimeout(() => {
-            statusIndicator.style.opacity = '0';
-            statusIndicator.style.transition = 'opacity 1s';
-            setTimeout(() => statusIndicator.remove(), 1000);
-          }, 3000);
+          // NO ocultar, dejar visible para debug
+          // setTimeout(() => {
+          //   statusIndicator.style.opacity = '0';
+          //   statusIndicator.style.transition = 'opacity 1s';
+          //   setTimeout(() => statusIndicator.remove(), 1000);
+          // }, 3000);
         }, 2000);
+
+        // Debug: Log cuando se conecte el WebSocket
+        console.log('🎮 Twitch Integration initialized with config:', {
+          clientId: config.clientId.substring(0, 10) + '...',
+          broadcasterId: config.broadcasterId
+        });
       }
     </script>
   </body>
