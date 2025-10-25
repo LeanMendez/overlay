@@ -92,9 +92,46 @@ export class TwitchEventSubClient {
   private maxReconnectAttempts = 5;
   private eventHandlers: Map<string, EventCallback[]> = new Map();
   private isConnecting = false;
+  private tokenRefreshInterval: number | null = null;
 
   constructor(config: TwitchConfig) {
     this.config = config;
+    this.startTokenRefreshCheck();
+  }
+
+  /**
+   * Iniciar verificación periódica del token (cada 30 minutos)
+   */
+  private startTokenRefreshCheck() {
+    // Verificar cada 30 minutos si el token necesita refresh
+    this.tokenRefreshInterval = window.setInterval(async () => {
+      await this.checkAndRefreshToken();
+    }, 30 * 60 * 1000); // 30 minutos
+  }
+
+  /**
+   * Verificar y refrescar token si es necesario
+   */
+  private async checkAndRefreshToken() {
+    try {
+      const { TwitchAuthService } = await import('./TwitchAuth');
+      const credentials = TwitchAuthService.loadCredentials();
+
+      if (!credentials) return;
+
+      const updatedCredentials = await TwitchAuthService.ensureValidToken(credentials);
+
+      if (updatedCredentials && updatedCredentials.accessToken !== this.config.accessToken) {
+        console.log('Token was refreshed, updating config...');
+        this.config.accessToken = updatedCredentials.accessToken;
+
+        // Reconectar con el nuevo token
+        this.disconnect();
+        await this.connect();
+      }
+    } catch (error) {
+      console.error('Error checking/refreshing token:', error);
+    }
   }
 
   /**
@@ -337,5 +374,11 @@ export class TwitchEventSubClient {
     }
     this.sessionId = null;
     this.eventHandlers.clear();
+
+    // Limpiar interval de refresh
+    if (this.tokenRefreshInterval) {
+      clearInterval(this.tokenRefreshInterval);
+      this.tokenRefreshInterval = null;
+    }
   }
 }

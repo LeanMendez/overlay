@@ -81,6 +81,19 @@ import '../styles/global.css';
 
             <div>
               <label class="block text-white/90 text-sm font-bold mb-2">
+                Client Secret (Optional - for token refresh)
+              </label>
+              <input
+                type="password"
+                id="clientSecret"
+                placeholder="your_client_secret_here (optional)"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+              <p class="text-xs text-white/50 mt-1">Only needed if you want automatic token refresh</p>
+            </div>
+
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
                 Access Token
               </label>
               <input
@@ -90,6 +103,19 @@ import '../styles/global.css';
                 class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
               />
               <p class="text-xs text-white/50 mt-1">This will be stored in localStorage (browser only)</p>
+            </div>
+
+            <div>
+              <label class="block text-white/90 text-sm font-bold mb-2">
+                Refresh Token (Optional - for token refresh)
+              </label>
+              <input
+                type="password"
+                id="refreshToken"
+                placeholder="your_refresh_token_here (optional)"
+                class="w-full bg-gray-700 border border-gray-600 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+              />
+              <p class="text-xs text-white/50 mt-1">Get this from twitchtokengenerator.com along with your access token</p>
             </div>
 
             <div>
@@ -159,7 +185,9 @@ import '../styles/global.css';
         if (config) {
           const parsed = JSON.parse(config);
           (document.getElementById('clientId') as HTMLInputElement).value = parsed.clientId || '';
+          (document.getElementById('clientSecret') as HTMLInputElement).value = parsed.clientSecret || '';
           (document.getElementById('accessToken') as HTMLInputElement).value = parsed.accessToken || '';
+          (document.getElementById('refreshToken') as HTMLInputElement).value = parsed.refreshToken || '';
           (document.getElementById('broadcasterId') as HTMLInputElement).value = parsed.broadcasterId || '';
           (document.getElementById('moderatorId') as HTMLInputElement).value = parsed.moderatorId || '';
 
@@ -170,12 +198,16 @@ import '../styles/global.css';
       // Update current config display
       function updateCurrentConfig(config: any) {
         const div = document.getElementById('currentConfig')!;
+        const hasRefresh = config.clientSecret && config.refreshToken;
         div.innerHTML = `
           <div class="space-y-2">
             <p><strong>Client ID:</strong> ${config.clientId ? config.clientId.substring(0, 10) + '...' : 'Not set'}</p>
+            <p><strong>Client Secret:</strong> ${config.clientSecret ? '••••••••' : 'Not set'}</p>
             <p><strong>Access Token:</strong> ${config.accessToken ? '••••••••' : 'Not set'}</p>
+            <p><strong>Refresh Token:</strong> ${config.refreshToken ? '••••••••' : 'Not set'}</p>
             <p><strong>Broadcaster ID:</strong> ${config.broadcasterId || 'Not set'}</p>
             <p><strong>Moderator ID:</strong> ${config.moderatorId || 'Not set'}</p>
+            ${hasRefresh ? '<p class="text-green-400 text-sm mt-2">✓ Auto-refresh enabled</p>' : '<p class="text-yellow-400 text-sm mt-2">⚠ Auto-refresh not enabled (tokens will expire)</p>'}
           </div>
         `;
       }
@@ -208,7 +240,9 @@ import '../styles/global.css';
 
         const config = {
           clientId: (document.getElementById('clientId') as HTMLInputElement).value,
+          clientSecret: (document.getElementById('clientSecret') as HTMLInputElement).value,
           accessToken: (document.getElementById('accessToken') as HTMLInputElement).value,
+          refreshToken: (document.getElementById('refreshToken') as HTMLInputElement).value,
           broadcasterId: (document.getElementById('broadcasterId') as HTMLInputElement).value,
           moderatorId: (document.getElementById('moderatorId') as HTMLInputElement).value,
         };
@@ -218,9 +252,23 @@ import '../styles/global.css';
           return;
         }
 
-        localStorage.setItem('twitchConfig', JSON.stringify(config));
+        // Calcular tiempo de expiración (60 días por defecto)
+        const expiresAt = Date.now() + (60 * 24 * 60 * 60 * 1000);
+        const configToSave = {
+          ...config,
+          expiresAt,
+          savedAt: Date.now(),
+        };
+
+        localStorage.setItem('twitchConfig', JSON.stringify(configToSave));
         updateCurrentConfig(config);
-        showStatus('Configuration saved successfully! You can now use the chat overlay with Twitch integration.', 'success');
+
+        const hasAutoRefresh = config.clientSecret && config.refreshToken;
+        if (hasAutoRefresh) {
+          showStatus('✓ Configuration saved with auto-refresh enabled! Tokens will refresh automatically.', 'success');
+        } else {
+          showStatus('⚠ Configuration saved but auto-refresh is disabled. Add Client Secret and Refresh Token to enable it.', 'success');
+        }
       });
 
       // Test connection
