@@ -15,6 +15,15 @@ export default function AlertListener() {
 
     window.addEventListener('triggerAlert', handleCustomAlert as EventListener);
 
+    // Listen for postMessage events (from StreamElements iframe)
+    const handlePostMessage = (event: MessageEvent) => {
+      if (event.data.type === 'triggerAlert' && event.data.detail) {
+        const { type, username, message, amount } = event.data.detail;
+        triggerAlert(type, username, message, amount);
+      }
+    };
+    window.addEventListener('message', handlePostMessage);
+
     // Also check URL parameters for testing
     const params = new URLSearchParams(window.location.search);
     const testType = params.get('test');
@@ -44,6 +53,7 @@ export default function AlertListener() {
 
     return () => {
       window.removeEventListener('triggerAlert', handleCustomAlert as EventListener);
+      window.removeEventListener('message', handlePostMessage);
     };
   }, []);
 

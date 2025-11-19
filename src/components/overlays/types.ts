@@ -21,27 +21,27 @@ export const ALERT_CONFIG = {
   follow: {
     title: 'NEW FOLLOWER',
     icon: '★',
-    accentColor: 'rgba(255, 255, 255, 0.9)',
+    accentColor: '#60A5FA', // Sapphire Blue
   },
   subscribe: {
     title: 'NEW SUBSCRIBER',
     icon: '◆',
-    accentColor: 'rgba(255, 255, 255, 0.95)',
+    accentColor: '#F87171', // Ruby Red
   },
   donation: {
     title: 'DONATION',
     icon: '◈',
-    accentColor: 'rgba(255, 255, 255, 1)',
+    accentColor: '#34D399', // Emerald Green
   },
   raid: {
     title: 'RAID',
     icon: '⚡',
-    accentColor: 'rgba(255, 255, 255, 0.9)',
+    accentColor: '#FBBF24', // Topaz Gold
   },
   bits: {
     title: 'BITS',
     icon: '◇',
-    accentColor: 'rgba(255, 255, 255, 0.85)',
+    accentColor: '#E0F2FE', // Diamond White/Cyan
   },
 } as const;
 

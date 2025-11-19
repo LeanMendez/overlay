@@ -92,7 +92,9 @@ export default function AlertBox({
                 className="text-8xl font-bold text-white"
                 style={{
                   animation: 'text-glow 1.5s ease-in-out infinite',
-                  filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.8))',
+                  filter: `drop-shadow(0 0 20px ${config.accentColor})`,
+                  color: 'white',
+                  textShadow: `0 0 10px ${config.accentColor}`,
                 }}
               >
                 {config.icon}
