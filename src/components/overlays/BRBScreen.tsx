@@ -13,7 +13,7 @@ const TEXTS = {
   },
   es: {
     title: 'YA VUELVO',
-    subtitle: '¡Tomando un descanso rápido, no te vayas!',
+    subtitle: '¡Estoy haciendo una mini pausa, no te vayas!',
     default: 'El stream continúa en breve',
   },
 };
@@ -148,17 +148,11 @@ export default function BRBScreen({
       {/* Text content */}
       <div className="absolute inset-0 flex flex-col items-center justify-end pb-32">
         <div className="relative">
-          {/* Glowing background */}
-          <div
-            className="absolute inset-0 blur-3xl bg-white/10"
-            style={{ animation: 'glow-pulse 3s ease-in-out infinite' }}
-          />
-
           {/* Main title */}
           <h1
             className="text-9xl font-bold text-white tracking-wider relative z-10 text-center mb-6"
             style={{
-              animation: 'text-glow 2s ease-in-out infinite',
+              animation: 'text-glow 5s ease-in-out infinite',
               letterSpacing: '0.4em',
             }}
           >
@@ -171,12 +165,7 @@ export default function BRBScreen({
         </div>
 
         {/* Subtitle */}
-        <p
-          className="text-2xl text-white/80 tracking-wide text-center max-w-2xl mb-8"
-          style={{ animation: 'text-reveal 1s ease-out 0.3s both' }}
-        >
-          {message || text.subtitle}
-        </p>
+        <p className="text-5xl text-white tracking-wide text-center max-w-3xl mb-24" style={{animation: 'text-reveal 1s ease-out 0.3s both', textShadow: '0 0 12px rgba(255,255,255,0.9)'}}>{message || text.subtitle}</p>
 
         {/* Loading animation */}
         <div className="flex items-center gap-4 mt-8">

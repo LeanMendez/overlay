@@ -159,9 +159,10 @@ export default function StartingScreen({
 
         {/* Subtitle */}
         <p
-          className="text-2xl text-white/80 mb-12 tracking-wide"
+          className="text-5xl text-white mb-12 tracking-wide"
           style={{
             animation: 'text-reveal 1s ease-out 0.6s both',
+            textShadow: '0 0 12px rgba(255,255,255,0.9)',
           }}
         >
           {text.subtitle}

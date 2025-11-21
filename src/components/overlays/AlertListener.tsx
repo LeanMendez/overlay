@@ -17,7 +17,9 @@ export default function AlertListener() {
 
     // Listen for postMessage events (from StreamElements iframe)
     const handlePostMessage = (event: MessageEvent) => {
+      console.log('📩 Message received:', event.data);
       if (event.data.type === 'triggerAlert' && event.data.detail) {
+        console.log('🔔 Triggering alert from message:', event.data.detail);
         const { type, username, message, amount } = event.data.detail;
         triggerAlert(type, username, message, amount);
       }
