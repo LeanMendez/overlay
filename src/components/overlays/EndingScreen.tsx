@@ -113,9 +113,9 @@ export default function EndingScreen({
       </div>
 
       {/* Central content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-20">
         {/* Main title with expanding effect */}
-        <div className="relative mb-12">
+        <div className="relative">
           {/* Expanding hexagons */}
           {[0, 1, 2].map((i) => (
             <div
@@ -125,7 +125,7 @@ export default function EndingScreen({
                 animation: `pulse-ring 3s ease-out infinite ${i * 0.5}s`,
               }}
             >
-              <div className="w-[600px] h-[600px] border-2 border-white/20">
+              <div className="w-[800px] h-[800px] border-2 border-white/20">
                 {/* Hexagon-ish shape using clip-path */}
                 <div
                   className="w-full h-full border-2 border-white/10"
@@ -138,7 +138,7 @@ export default function EndingScreen({
           ))}
 
           <h1
-            className="text-8xl font-bold text-white tracking-wider relative z-10 text-center"
+            className="text-9xl font-bold text-white tracking-wider relative z-10 text-center"
             style={{
               animation: 'text-reveal 1.2s ease-out both, text-glow 3s ease-in-out infinite 1s',
               letterSpacing: '0.3em',
@@ -148,7 +148,7 @@ export default function EndingScreen({
           </h1>
 
           {/* Hollow Knight style ornament */}
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute -top-16 left-1/2 -translate-x-1/2 flex gap-3">
             <div className="w-3 h-3 bg-white/70 rotate-45" />
             <div className="w-3 h-3 bg-white/50 rotate-45" />
             <div className="w-3 h-3 bg-white/70 rotate-45" />
@@ -156,7 +156,7 @@ export default function EndingScreen({
             <div className="w-3 h-3 bg-white/70 rotate-45" />
           </div>
 
-          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 flex gap-3">
             <div className="w-3 h-3 bg-white/70 rotate-45" />
             <div className="w-3 h-3 bg-white/50 rotate-45" />
             <div className="w-3 h-3 bg-white/70 rotate-45" />
@@ -167,7 +167,7 @@ export default function EndingScreen({
 
         {/* Subtitle */}
         <div
-          className="text-3xl text-white/70 tracking-widest mb-8"
+          className="text-5xl text-white/70 tracking-widest"
           style={{
             animation: 'text-reveal 1s ease-out 0.4s both',
             letterSpacing: '0.5em',
@@ -178,7 +178,7 @@ export default function EndingScreen({
 
         {/* Message box */}
         <div
-          className="relative border-4 border-white/40 px-12 py-8 bg-black/60 backdrop-blur-sm mb-12"
+          className="relative border-4 border-white/40 px-20 py-12 bg-black/60 backdrop-blur-sm"
           style={{
             animation: 'text-reveal 1s ease-out 0.8s both, intense-glow 4s ease-in-out infinite 1.5s',
           }}
@@ -201,52 +201,27 @@ export default function EndingScreen({
             <div className="absolute bottom-0 right-0 w-1 h-full bg-white" />
           </div>
 
-          <p className="text-2xl text-white/90 text-center font-light tracking-wide">
+          <p className="text-4xl text-white/90 text-center font-light tracking-wide">
             {message || text.farewell}
           </p>
         </div>
 
-        {/* Social info */}
-        {socials && Object.keys(socials).length > 0 && (
-          <div
-            className="flex gap-8 mb-8"
-            style={{ animation: 'text-reveal 1s ease-out 1.2s both' }}
-          >
-            {socials.twitter && (
-              <div className="text-center">
-                <div className="text-white/60 text-sm mb-1">Twitter</div>
-                <div className="text-white text-lg">@{socials.twitter}</div>
-              </div>
-            )}
-            {socials.youtube && (
-              <div className="text-center">
-                <div className="text-white/60 text-sm mb-1">YouTube</div>
-                <div className="text-white text-lg">{socials.youtube}</div>
-              </div>
-            )}
-            {socials.discord && (
-              <div className="text-center">
-                <div className="text-white/60 text-sm mb-1">Discord</div>
-                <div className="text-white text-lg">{socials.discord}</div>
-              </div>
-            )}
-          </div>
-        )}
+
 
         {/* Follow message */}
         <div
-          className="text-white/70 text-xl tracking-wide"
+          className="text-white/70 text-3xl tracking-wide"
           style={{ animation: 'text-reveal 1s ease-out 1.4s both' }}
         >
           {text.follow}
         </div>
 
         {/* Animated stars indicator */}
-        <div className="mt-8 flex gap-3">
+        <div className="flex gap-4">
           {[0, 1, 2, 3, 4].map((i) => (
             <div
               key={i}
-              className="text-white text-2xl"
+              className="text-white text-3xl"
               style={{
                 animation: `twinkle 2s ease-in-out infinite ${i * 0.3}s`,
               }}
