@@ -1,26 +1,18 @@
 import Landscape from './Landscape';
-import CountdownTimer from './CountdownTimer';
 import { useUrlOverrides } from './useUrlOverrides';
 
 interface WaitingScreenAlbaProps {
   canal?: string;
-  juego?: string;
-  modo?: string;
-  segundos?: number;
 }
 
 /** Direction "1a" from the design: landscape bleeds full-screen, title sits over the water.
- * `?canal=` / `?juego=` / `?modo=` / `?segundos=` in the page URL override these. */
+ * `?canal=` in the page URL overrides this.
+ * The countdown is provided by a separate StreamElements widget, not rendered here. */
 export default function WaitingScreenAlba({
   canal: canalProp = 'TWITCH.TV/HOPPERBOOM',
-  juego: juegoProp = 'AGE OF EMPIRES II',
-  modo: modoProp = 'RANKED 1V1',
-  segundos = 300,
 }: WaitingScreenAlbaProps) {
-  const url = useUrlOverrides({ canal: 'string', juego: 'string', modo: 'string' });
+  const url = useUrlOverrides({ canal: 'string' });
   const canal = url.canal ?? canalProp;
-  const juego = url.juego ?? juegoProp;
-  const modo = url.modo ?? modoProp;
 
   return (
     <div className="font-pixel fixed inset-0 overflow-hidden" style={{ background: 'var(--mint-bg)' }}>
@@ -36,10 +28,6 @@ export default function WaitingScreenAlba({
       >
         <span style={{ width: 14, height: 14, background: 'var(--mint-bg)' }} />
         <span style={{ fontSize: 22, fontWeight: 700, letterSpacing: '.28em', color: 'var(--mint-bg)' }}>COMENZAMOS EN BREVE</span>
-      </div>
-
-      <div className="absolute" style={{ left: '7.5vw', top: '16vh' }}>
-        <CountdownTimer segundos={segundos} />
       </div>
 
       <div className="absolute flex flex-col" style={{ left: '6vw', bottom: '20vh', gap: 22, maxWidth: '80vw' }}>
@@ -66,9 +54,6 @@ export default function WaitingScreenAlba({
           <span style={{ width: 14, height: 14, background: 'rgba(79,211,171,.45)' }} />
           <span style={{ width: 14, height: 14, background: 'rgba(79,211,171,.2)' }} />
         </div>
-        <span style={{ fontSize: 24, letterSpacing: '.26em', color: 'rgba(159,240,214,.65)' }}>
-          {juego} · {modo}
-        </span>
       </div>
     </div>
   );
