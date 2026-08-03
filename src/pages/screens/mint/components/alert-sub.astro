@@ -1,0 +1,31 @@
+---
+import AlertBanner from '../../../../components/overlays/mint/AlertBanner';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Alerta · Nueva Suscripción - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <AlertBanner client:load tipo="sub" nombre="mila.exe" />
+    </div>
+  </body>
+</html>

@@ -121,6 +121,25 @@ Versión compacta y discreta ideal para usar durante gameplay:
 - **Marcador único** - Solo línea al 50% en barra de progreso
 - Mantiene todas las animaciones y celebración con confetti
 
+### Stream Screens 🍵 — Variante Mint Pixel Art
+Segundo set de pantallas de transición, independiente del set original ("Stream Screens 🌙"), con estética cozy pixel art en tonos mint/verde menta e inspirado en pixel art tipo "Matcha Morning":
+
+- Cielo en bandas mint con colinas pixeladas y pasto en primer plano
+- Mascotas pixel art (sol sonriente / luna dormida / luna serena) con parpadeo y "zzz" flotante
+- Nubes y estrellas pixeladas animadas con seed determinístico (mismo layout en cada carga, sin parpadeos de hidratación)
+- Paneles redondeados con borde grueso y sombra plana, mismo lenguaje visual que el resto del pack
+
+**No reemplaza las pantallas originales** — conviven en rutas separadas bajo `/screens/mint/`. Es un set en español únicamente (sin variantes `-es`/`-en`).
+
+- **Ya Comenzamos**: `http://localhost:4321/screens/mint/waiting-alba` | `/screens/mint/waiting-consola`
+- **BRB**: `http://localhost:4321/screens/mint/brb`
+- **El Stream Terminó**: `http://localhost:4321/screens/mint/ended`
+- **Solo Charla**: `http://localhost:4321/screens/mint/justchatting`
+- **Overlay En Juego**: `http://localhost:4321/screens/mint/ingame-riel` | `/screens/mint/ingame-fps`
+- **Preview de todas**: `http://localhost:4321/stream-screens-mint`
+
+Personalización: componentes en `/src/components/overlays/mint/`, paleta de colores en las variables `--mint-*` de `/src/styles/global.css`.
+
 ### Próximamente
 - Lower Third - Banner inferior con información en tiempo real
 

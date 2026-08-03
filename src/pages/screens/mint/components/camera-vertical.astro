@@ -1,0 +1,26 @@
+---
+import CameraFrame from '../../../../components/overlays/mint/CameraFrame';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cámara · Vertical - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <CameraFrame client:load etiqueta="EN VIVO" placeholder />
+    </div>
+  </body>
+</html>

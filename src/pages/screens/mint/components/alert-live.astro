@@ -1,0 +1,35 @@
+---
+import LiveAlertBox from '../../../../components/overlays/mint/LiveAlertBox';
+import TwitchBridge from '../../../../components/overlays/mint/TwitchBridge';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Alertas En Vivo - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Fuente real para OBS: requiere credenciales guardadas en /twitch-setup.
+         No muestra nada hasta que llega un seguidor/sub/bits/raid real. -->
+    <TwitchBridge client:load />
+    <div class="wrap">
+      <LiveAlertBox client:load />
+    </div>
+  </body>
+</html>

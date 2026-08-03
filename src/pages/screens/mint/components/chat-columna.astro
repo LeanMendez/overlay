@@ -1,0 +1,30 @@
+---
+import ChatPanel from '../../../../components/overlays/mint/ChatPanel';
+import TwitchBridge from '../../../../components/overlays/mint/TwitchBridge';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Chat · Columna - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <TwitchBridge client:load />
+    <div class="wrap">
+      <ChatPanel client:load variante="columna" live />
+    </div>
+  </body>
+</html>

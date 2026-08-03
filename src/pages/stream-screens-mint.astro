@@ -1,0 +1,285 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Stream Screens Preview - Mint Pixel Art CRT</title>
+    <style>
+      body {
+        background: #051211;
+        min-height: 100vh;
+        padding: 3rem;
+      }
+      .screen-card {
+        background: rgba(79, 211, 171, 0.03);
+        border: 2px solid rgba(79, 211, 171, 0.15);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+      .screen-card:hover {
+        border-color: rgba(79, 211, 171, 0.4);
+        background: rgba(79, 211, 171, 0.05);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(79, 211, 171, 0.1);
+      }
+      .screen-preview {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #04100f;
+        border: 1px solid rgba(79, 211, 171, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+      .screen-preview iframe {
+        width: 1920px;
+        height: 1080px;
+        border: none;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: top left;
+      }
+      .screen-preview.compact {
+        aspect-ratio: 3/2;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(79, 211, 171, 0.12);
+        border: 1px solid rgba(79, 211, 171, 0.3);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-white text-5xl font-light mb-3 text-center">Stream Screens — Mint Pixel Art CRT</h1>
+      <p class="text-white/60 text-center mb-12">
+        Dirección oscura terminal/CRT para hopperboom (Age of Empires II). Reemplaza el theme mint pastel anterior.
+      </p>
+
+      <!-- Waiting screens -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/30"></span>
+          Pantalla · Ya Comenzamos
+          <span class="flex-1 h-0.5 bg-white/30"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Alba · paisaje a sangre</h3>
+              <span class="tag text-white">1a</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/waiting-alba" title="Waiting screen - Alba"></iframe>
+            </div>
+            <a href="/screens/mint/waiting-alba" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Consola · franja cinemascope</h3>
+              <span class="tag text-white">1c</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/waiting-consola" title="Waiting screen - Consola"></iframe>
+            </div>
+            <a href="/screens/mint/waiting-consola" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- In-game overlays -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/30"></span>
+          Overlay En Juego · 2560×1440 (fondo transparente)
+          <span class="flex-1 h-0.5 bg-white/30"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Riel derecho · chat + cámara</h3>
+              <span class="tag text-white">1d</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/ingame-riel" title="In-game overlay - Riel derecho"></iframe>
+            </div>
+            <a href="/screens/mint/ingame-riel" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">FPS · cámara vertical + chat flotante</h3>
+              <span class="tag text-white">1f</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/ingame-fps" title="In-game overlay - FPS"></iframe>
+            </div>
+            <a href="/screens/mint/ingame-fps" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir Pantalla Completa →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cierre y charla -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/30"></span>
+          Cierre Y Charla
+          <span class="flex-1 h-0.5 bg-white/30"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">El stream terminó</h3>
+              <span class="tag text-white">1g</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/ended" title="Ended screen"></iframe>
+            </div>
+            <a href="/screens/mint/ended" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Solo charla</h3>
+              <span class="tag text-white">1h</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/justchatting" title="Just chatting screen"></iframe>
+            </div>
+            <a href="/screens/mint/justchatting" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Ya vuelvo</h3>
+              <span class="tag text-white">BRB</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/brb" title="BRB screen"></iframe>
+            </div>
+            <a href="/screens/mint/brb" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Componentes sueltos -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/30"></span>
+          Componentes Sueltos · fuentes de OBS independientes
+          <span class="flex-1 h-0.5 bg-white/30"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { href: '/screens/mint/components/chat-columna', label: 'Chat · columna' },
+            { href: '/screens/mint/components/chat-ticker', label: 'Chat · ticker' },
+            { href: '/screens/mint/components/chat-flotante', label: 'Chat · flotante' },
+            { href: '/screens/mint/components/camera-horizontal', label: 'Cámara · horizontal' },
+            { href: '/screens/mint/components/camera-vertical', label: 'Cámara · vertical' },
+            { href: '/screens/mint/components/alert-seguidor', label: 'Alerta · seguidor' },
+            { href: '/screens/mint/components/alert-sub', label: 'Alerta · suscripción' },
+            { href: '/screens/mint/components/alert-live', label: 'Alertas · en vivo (OBS)' },
+            { href: '/screens/mint/components/scoreboard', label: 'Marcador W/L' },
+            { href: '/screens/mint/components/countdown', label: 'Cuenta regresiva' },
+            { href: '/screens/mint/components/landscape-alba', label: 'Paisaje · alba' },
+            { href: '/screens/mint/components/landscape-bruma', label: 'Paisaje · bruma' },
+            { href: '/screens/mint/components/landscape-noche', label: 'Paisaje · noche' },
+          ].map((c) => (
+            <div class="screen-card p-4">
+              <h3 class="text-white text-sm font-medium mb-3">{c.label}</h3>
+              <div class="screen-preview compact mb-3">
+                <iframe src={c.href} title={c.label}></iframe>
+              </div>
+              <a href={c.href} target="_blank" class="inline-block px-3 py-1.5 bg-white/10 border border-white/20 text-white text-xs hover:bg-white/20 transition-all">
+                Abrir →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Probar sin estar en vivo -->
+      <div class="mb-16">
+        <h2 class="text-white text-3xl font-light mb-6 flex items-center gap-3">
+          <span class="w-12 h-0.5 bg-white/30"></span>
+          🧪 Probar Sin Estar En Vivo
+          <span class="flex-1 h-0.5 bg-white/30"></span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="screen-card p-6">
+            <h3 class="text-white text-xl font-medium mb-2">Probar Chat</h3>
+            <p class="text-white/60 text-sm mb-4">Botones para simular mensajes de chat sin necesidad de estar en vivo.</p>
+            <a href="/screens/mint/components/chat-tester" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+          <div class="screen-card p-6">
+            <h3 class="text-white text-xl font-medium mb-2">Probar Alertas / Suscripciones</h3>
+            <p class="text-white/60 text-sm mb-4">Botones para simular nuevo seguidor, suscripción, bits y raid.</p>
+            <a href="/screens/mint/components/alert-tester" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/5 border border-white/10 p-8 rounded">
+        <h2 class="text-white text-2xl font-light mb-6">Cómo usar en OBS</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-white font-medium mb-3">Setup</h3>
+            <ol class="text-white/80 space-y-2 text-sm list-decimal list-inside">
+              <li>Pantallas completas (Ya Comenzamos, El Stream Terminó, Solo Charla, Ya Vuelvo): fuente "Browser" a 1920×1080 en su propia escena</li>
+              <li>Overlay en juego (riel/FPS): fuente "Browser" con fondo transparente, colocada arriba de tu Game Capture</li>
+              <li>Componentes sueltos: cada uno es su propia fuente "Browser" — tamaño según el widget (ej. chat columna ~440×860)</li>
+              <li>Marca "Shutdown source when not visible" en las que no sean permanentes</li>
+            </ol>
+          </div>
+          <div>
+            <h3 class="text-white font-medium mb-3">Personalización</h3>
+            <p class="text-white/80 text-sm mb-3">
+              Edita los archivos .astro en <code class="bg-white/10 px-1">/src/pages/screens/mint/</code> o los componentes en
+              <code class="bg-white/10 px-1">/src/components/overlays/mint/</code> para ajustar textos, colores (variables <code class="bg-white/10 px-1">--mint-*</code> en global.css) y mensajes de chat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function scalePreviews() {
+        document.querySelectorAll<HTMLElement>('.screen-preview').forEach((el) => {
+          const iframe = el.querySelector<HTMLIFrameElement>('iframe');
+          if (!iframe) return;
+          iframe.style.transform = `scale(${el.clientWidth / 1920})`;
+        });
+      }
+      window.addEventListener('resize', scalePreviews);
+      scalePreviews();
+    </script>
+  </body>
+</html>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&family=Silkscreen:wght@400;700&display=swap');
 
 @layer base {
   body {
@@ -355,5 +356,133 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   Mint pixel-art overlay kit (dark CRT / AoE2 stream direction for hopperboom)
+   Additive only: nothing above this line is touched by the mint theme.
+   ========================================================================== */
+
+:root {
+  --mint-bg: #04100f;
+  --mint-bg-alt: #030b0b;
+  --mint-panel: rgba(4, 16, 15, 0.9);
+  --mint-accent: #4fd3ab;
+  --mint-accent-bright: #9ff0d6;
+  --mint-accent-dim: rgba(79, 211, 171, 0.28);
+  --mint-accent-faint: rgba(79, 211, 171, 0.14);
+  --mint-text: #f2fffa;
+  --mint-text-dim: rgba(223, 244, 236, 0.7);
+  --mint-gold: #f2c48b;
+  --mint-gold-dim: #d79f68;
+  --mint-shadow: rgba(2, 10, 9, 0.85);
+}
+
+.font-pixel {
+  font-family: 'Silkscreen', monospace;
+}
+
+.font-pixel-display {
+  font-family: 'Jersey 25', monospace;
+}
+
+.pixel-crisp {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  shape-rendering: crispEdges;
+}
+
+/* Vignette + scanlines shared by every full-screen mint composition */
+.mint-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 240px 70px rgba(2, 10, 9, 0.72);
+  pointer-events: none;
+}
+
+.mint-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0 3px, rgba(0, 0, 0, 0) 3px 6px);
+  pointer-events: none;
+}
+
+@keyframes mint-chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mint-alert-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px) scaleY(0.86);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(3px) scaleY(1);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* CRT tube power-off: collapses to a thin horizontal line before fading, echoing an
+   old monitor shutting down rather than just disappearing. */
+@keyframes mint-alert-out {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  55% {
+    opacity: 1;
+    transform: scaleY(0.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0.05);
+  }
+}
+
+@keyframes mint-alert-sweep {
+  0% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+@keyframes mint-alert-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes mint-blink-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes mint-cam-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(2000%);
   }
 }

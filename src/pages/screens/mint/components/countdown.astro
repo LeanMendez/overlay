@@ -1,0 +1,29 @@
+---
+import CountdownTimer from '../../../../components/overlays/mint/CountdownTimer';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cuenta Regresiva - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <CountdownTimer client:load segundos={300} />
+    </div>
+  </body>
+</html>

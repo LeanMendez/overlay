@@ -1,0 +1,29 @@
+---
+import Scoreboard from '../../../../components/overlays/mint/Scoreboard';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Marcador W/L - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <Scoreboard client:load />
+    </div>
+  </body>
+</html>

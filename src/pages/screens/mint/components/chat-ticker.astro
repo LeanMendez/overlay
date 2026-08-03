@@ -1,0 +1,31 @@
+---
+import ChatPanel from '../../../../components/overlays/mint/ChatPanel';
+import TwitchBridge from '../../../../components/overlays/mint/TwitchBridge';
+import '../../../../styles/global.css';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Chat · Ticker - Mint</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .wrap {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <TwitchBridge client:load />
+    <div class="wrap">
+      <ChatPanel client:load variante="ticker" live />
+    </div>
+  </body>
+</html>
