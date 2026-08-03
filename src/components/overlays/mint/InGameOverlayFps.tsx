@@ -12,7 +12,7 @@ interface InGameOverlayFpsProps {
 export default function InGameOverlayFps({ victorias = 9, derrotas = 4 }: InGameOverlayFpsProps) {
   return (
     <div className="font-pixel fixed inset-0 overflow-hidden">
-      <div className="absolute" style={{ left: '2vw', top: '4vh', width: '15vw', minWidth: 260, height: '46vh' }}>
+      <div className="absolute" style={{ left: '2vw', top: '4vh', width: 'calc(15vw - 100px)', minWidth: 260, height: 'calc(46vh - 150px)' }}>
         <CameraFrame etiqueta="EN VIVO" />
       </div>
 
