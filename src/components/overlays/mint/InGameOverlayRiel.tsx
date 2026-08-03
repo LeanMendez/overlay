@@ -1,21 +1,16 @@
 import CameraFrame from './CameraFrame';
-import Scoreboard from './Scoreboard';
 import { useUrlOverrides } from './useUrlOverrides';
 
 interface InGameOverlayRielProps {
   canal?: string;
-  victorias?: number;
-  derrotas?: number;
 }
 
 /** Direction "1d" from the design: right-rail HUD with a horizontal camera.
  * Transparent background — meant to sit above a Game Capture source in OBS.
- * `?canal=` in the page URL overrides the badge text; victorias/derrotas are handled by Scoreboard itself.
- * Chat is provided by a separate StreamElements widget, not rendered here. */
+ * `?canal=` in the page URL overrides the badge text.
+ * Chat and scoreboard are provided by separate StreamElements widgets, not rendered here. */
 export default function InGameOverlayRiel({
   canal: canalProp = 'TWITCH.TV/HOPPERBOOM',
-  victorias = 7,
-  derrotas = 2,
 }: InGameOverlayRielProps) {
   const url = useUrlOverrides({ canal: 'string' });
   const canal = url.canal ?? canalProp;
@@ -24,10 +19,6 @@ export default function InGameOverlayRiel({
     <div className="font-pixel fixed inset-0 overflow-hidden">
       <div className="absolute" style={{ right: '2vw', top: '65vh', width: '19vw', minWidth: 320, height: '18vh', minHeight: 180 }}>
         <CameraFrame />
-      </div>
-
-      <div className="absolute" style={{ left: '2vw', bottom: '3vh' }}>
-        <Scoreboard victorias={victorias} derrotas={derrotas} />
       </div>
 
       <div
