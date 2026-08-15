@@ -1,6 +1,5 @@
 ---
-import LiveAlertBox from '../../../../components/overlays/mint/LiveAlertBox';
-import TwitchBridge from '../../../../components/overlays/mint/TwitchBridge';
+import AlertBanner from '../../../../components/overlays/mint/AlertBanner';
 import '../../../../styles/global.css';
 ---
 
@@ -8,7 +7,7 @@ import '../../../../styles/global.css';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Alertas En Vivo - Mint</title>
+    <title>Alerta · Raid - Mint</title>
     <style>
       body {
         margin: 0;
@@ -25,11 +24,8 @@ import '../../../../styles/global.css';
     </style>
   </head>
   <body>
-    <!-- Fuente real para OBS: requiere credenciales guardadas en /twitch-setup.
-         No muestra nada hasta que llega un seguidor/sub/gift/resub/bits/raid real. -->
-    <TwitchBridge client:load />
     <div class="wrap">
-      <LiveAlertBox client:load />
+      <AlertBanner client:load tipo="raid" cantidad={147} />
     </div>
   </body>
 </html>

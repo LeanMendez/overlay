@@ -20,7 +20,7 @@ export default function WaitingScreenConsole({
       style={{ background: 'var(--mint-bg-alt)' }}
     >
       <div className="relative overflow-hidden" style={{ height: '43vh', borderTop: '6px solid var(--mint-accent)', borderBottom: '6px solid var(--mint-accent)' }}>
-        <Landscape variante="noche" animado className="absolute inset-0" style={{ height: '160%', top: '-20%' }} />
+        <Landscape variante="noche" animado className="absolute inset-0" style={{ height: '232.26%', top: '-41.94%' }} />
         <div className="mint-scanlines" />
         <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 200px 40px rgba(2,10,9,.8)' }} />
         <div className="absolute flex flex-col" style={{ left: '6.5vw', top: '50%', transform: 'translateY(-50%)', gap: 14 }}>

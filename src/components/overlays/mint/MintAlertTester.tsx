@@ -4,13 +4,16 @@ import TwitchBridge from './TwitchBridge';
 const TEST_ALERTS = [
   { label: 'Nuevo seguidor', detail: { type: 'follow' as const, username: 'Aldarion77' } },
   { label: 'Nueva suscripción', detail: { type: 'subscribe' as const, username: 'mila.exe', tier: '2000' } },
+  { label: 'Sub regalado', detail: { type: 'gift' as const, username: 'dorian_', total: 1 } },
+  { label: 'Resub', detail: { type: 'resub' as const, username: 'salvaP', cumulativeMonths: 24 } },
   { label: 'Bits', detail: { type: 'bits' as const, username: 'K3nzo', amount: 500 } },
   { label: 'Raid', detail: { type: 'raid' as const, username: 'sofi_hp', amount: 42 } },
 ];
 
 /** Dispatches synthetic `twitchAlert` window events — the same event bus real Twitch
- * follows/subs/bits/raids use via TwitchIntegration — so you can preview LiveAlertBox
- * without being live. If Twitch is connected (/twitch-setup) real alerts show here too. */
+ * follows/subs/gifts/resubs/bits/raids use via TwitchIntegration — so you can preview
+ * LiveAlertBox without being live. If Twitch is connected (/twitch-setup) real alerts
+ * show here too. */
 export default function MintAlertTester() {
   const trigger = (detail: (typeof TEST_ALERTS)[number]['detail']) => {
     window.dispatchEvent(new CustomEvent('twitchAlert', { detail }));

@@ -72,6 +72,36 @@ export interface CheerEvent {
   bits: number;
 }
 
+export interface SubscriptionGiftEvent {
+  user_id?: string;
+  user_login?: string;
+  user_name?: string;
+  broadcaster_user_id: string;
+  broadcaster_user_login: string;
+  broadcaster_user_name: string;
+  total: number;
+  tier: string;
+  cumulative_total: number | null;
+  is_anonymous: boolean;
+}
+
+export interface SubscriptionMessageEvent {
+  user_id: string;
+  user_login: string;
+  user_name: string;
+  broadcaster_user_id: string;
+  broadcaster_user_login: string;
+  broadcaster_user_name: string;
+  tier: string;
+  message: {
+    text: string;
+    emotes: Array<{ begin: number; end: number; id: string }>;
+  };
+  cumulative_months: number;
+  streak_months: number | null;
+  duration_months: number;
+}
+
 export interface RaidEvent {
   from_broadcaster_user_id: string;
   from_broadcaster_user_login: string;
@@ -274,6 +304,23 @@ export class TwitchEventSubClient {
       // Cheers
       {
         type: 'channel.cheer',
+        version: '1',
+        condition: {
+          broadcaster_user_id: this.config.broadcasterId,
+        },
+      },
+      // Gift subs (one event per gifting batch, not per recipient)
+      {
+        type: 'channel.subscription.gift',
+        version: '1',
+        condition: {
+          broadcaster_user_id: this.config.broadcasterId,
+        },
+      },
+      // Resub messages (channel.subscribe only fires for brand-new subs; renewals
+      // land here with the cumulative month count)
+      {
+        type: 'channel.subscription.message',
         version: '1',
         condition: {
           broadcaster_user_id: this.config.broadcasterId,

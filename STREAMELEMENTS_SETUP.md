@@ -1,6 +1,24 @@
 # Guía de Configuración con StreamElements
 
-Esta guía te explicará paso a paso cómo conectar tus nuevas alertas personalizadas con StreamElements para que funcionen en tu stream.
+Esta guía te explicará paso a paso cómo conectar tus alertas personalizadas con StreamElements para que funcionen en tu stream.
+
+## Opción recomendada: Widget nativo (kit de alertas pixel-art)
+
+Los archivos en [`streamelements-widget/`](./streamelements-widget/) (`widget.html`, `widget.css`, `widget.js`) son el diseño neo-brutalista del kit de alertas (el mismo look de `AlertBanner.tsx` — seguidor, sub nuevo, sub regalado, resub y raid) reescrito en HTML/CSS/JS planos, sin React ni Astro. Están pensados para pegarse directo en un **Custom Widget** de StreamElements: la página vive 100% adentro de SE, no depende de que tengas `npm run dev` corriendo ni de un iframe apuntando a tu compu.
+
+1. En StreamElements: **Streaming Tools → Overlays → tu overlay → + (Add Widget) → Static/Custom → Custom Widget**.
+2. Abrí el editor del widget (Settings/Open Editor) y pegá cada archivo en su pestaña:
+   - **HTML**: contenido de `streamelements-widget/widget.html`
+   - **CSS**: contenido de `streamelements-widget/widget.css`
+   - **JS**: contenido de `streamelements-widget/widget.js`
+3. Guardá. El widget queda escuchando el evento `onEventReceived` que SE ya dispara con datos reales de Twitch (follows, subs, gift subs, resubs, raids) — no hace falta ninguna otra configuración ni tu propio cliente de EventSub.
+4. Copiá la URL del overlay (icono de cadena) y agregala como fuente **Browser** en OBS.
+
+Los tipos soportados son los mismos 5 que ves en `/screens/mint/components/alert-tester` (más bits, mapeados al estilo de "sub"). Donaciones/tips (`tip-latest`) y prime sub no están mapeados todavía — si los querés, hay que agregar esos casos a `fromStreamElements()` en `widget.js`.
+
+## Opción alternativa: iframe apuntando a tu servidor local
+
+Si preferís seguir usando el proyecto Astro tal cual (por ejemplo para iterar rápido en el diseño), podés usar el truco de iframe que se describe abajo. Tiene la desventaja de necesitar `npm run dev` corriendo mientras estás en vivo.
 
 ## ¿Cómo funciona?
 

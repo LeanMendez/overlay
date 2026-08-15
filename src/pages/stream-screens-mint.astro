@@ -144,7 +144,20 @@ import '../styles/global.css';
           Cierre Y Charla
           <span class="flex-1 h-0.5 bg-white/30"></span>
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="screen-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-white text-xl font-medium">Fondo limpio · cinemascope</h3>
+              <span class="tag text-white">1o</span>
+            </div>
+            <div class="screen-preview mb-4">
+              <iframe src="/screens/mint/clean-bg" title="Clean background screen"></iframe>
+            </div>
+            <a href="/screens/mint/clean-bg" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
+              Abrir →
+            </a>
+          </div>
+
           <div class="screen-card p-6">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-white text-xl font-medium">El stream terminó</h3>
@@ -202,6 +215,9 @@ import '../styles/global.css';
             { href: '/screens/mint/components/camera-vertical', label: 'Cámara · vertical' },
             { href: '/screens/mint/components/alert-seguidor', label: 'Alerta · seguidor' },
             { href: '/screens/mint/components/alert-sub', label: 'Alerta · suscripción' },
+            { href: '/screens/mint/components/alert-gift', label: 'Alerta · sub regalado' },
+            { href: '/screens/mint/components/alert-resub', label: 'Alerta · resub' },
+            { href: '/screens/mint/components/alert-raid', label: 'Alerta · raid' },
             { href: '/screens/mint/components/alert-live', label: 'Alertas · en vivo (OBS)' },
             { href: '/screens/mint/components/scoreboard', label: 'Marcador W/L' },
             { href: '/screens/mint/components/countdown', label: 'Cuenta regresiva' },
@@ -239,7 +255,7 @@ import '../styles/global.css';
           </div>
           <div class="screen-card p-6">
             <h3 class="text-white text-xl font-medium mb-2">Probar Alertas / Suscripciones</h3>
-            <p class="text-white/60 text-sm mb-4">Botones para simular nuevo seguidor, suscripción, bits y raid.</p>
+            <p class="text-white/60 text-sm mb-4">Botones para simular nuevo seguidor, suscripción, sub regalado, resub, bits y raid.</p>
             <a href="/screens/mint/components/alert-tester" target="_blank" class="inline-block px-4 py-2 bg-white/10 border border-white/20 text-white text-sm hover:bg-white/20 transition-all">
               Abrir →
             </a>

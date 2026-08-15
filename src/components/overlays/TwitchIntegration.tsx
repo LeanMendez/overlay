@@ -115,6 +115,38 @@ export default function TwitchIntegration({
       }));
     });
 
+    clientRef.current.on('channel.subscription.gift', (event) => {
+      console.log('Gift subs:', event);
+      const alert = {
+        type: 'gift',
+        username: event.is_anonymous ? 'Anónimo' : (event.user_name || 'Anónimo'),
+        total: event.total,
+      };
+
+      if (onAlert) onAlert(alert);
+
+      window.dispatchEvent(new CustomEvent('twitchAlert', {
+        detail: alert,
+      }));
+    });
+
+    clientRef.current.on('channel.subscription.message', (event) => {
+      console.log('Resub:', event);
+      const alert = {
+        type: 'resub',
+        username: event.user_name,
+        tier: event.tier,
+        cumulativeMonths: event.cumulative_months,
+        message: event.message?.text,
+      };
+
+      if (onAlert) onAlert(alert);
+
+      window.dispatchEvent(new CustomEvent('twitchAlert', {
+        detail: alert,
+      }));
+    });
+
     clientRef.current.on('channel.raid', (event) => {
       console.log('Raid received:', event);
       const alert = {

@@ -23,6 +23,7 @@ export default function LiveAlertBox({ displayMs = 6000, className, style }: Liv
       nombre={alert.nombre}
       kicker={alert.kicker}
       detalle={alert.detalle}
+      cantidad={alert.cantidad}
       exiting={exiting}
       className={className}
       style={style}

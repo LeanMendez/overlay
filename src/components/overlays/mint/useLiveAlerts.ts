@@ -6,14 +6,20 @@ export interface LiveAlert {
   nombre: string;
   kicker: string;
   detalle: string;
+  cantidad?: number;
 }
 
 interface TwitchAlertEventDetail {
-  type: 'follow' | 'subscribe' | 'bits' | 'raid';
+  type: 'follow' | 'subscribe' | 'bits' | 'raid' | 'gift' | 'resub';
   username: string;
   tier?: string;
+  /** bits count (type=bits) / raid viewer count (type=raid) */
   amount?: number;
   message?: string;
+  /** number of subs gifted in this batch (type=gift) */
+  total?: number;
+  /** lifetime months subscribed (type=resub) */
+  cumulativeMonths?: number;
 }
 
 const TIER_LABEL: Record<string, string> = {
@@ -28,9 +34,29 @@ function toLiveAlert(detail: TwitchAlertEventDetail): LiveAlert {
       return {
         tipo: 'sub',
         nombre: detail.username,
-        kicker: 'NUEVA SUSCRIPCIÓN',
+        kicker: 'SE HA SUSCRITO',
         detalle: detail.tier ? (TIER_LABEL[detail.tier] ?? `NIVEL ${detail.tier}`) : 'GRACIAS POR SUSCRIBIRTE',
       };
+    case 'gift': {
+      const total = detail.total ?? 1;
+      return {
+        tipo: 'gift',
+        nombre: detail.username,
+        cantidad: total,
+        kicker: total > 1 ? `SUB REGALADO ×${total}` : 'SUB REGALADO',
+        detalle: `regala ${total} sub${total > 1 ? 's' : ''} a la comu`,
+      };
+    }
+    case 'resub': {
+      const months = detail.cumulativeMonths ?? 1;
+      return {
+        tipo: 'resub',
+        nombre: detail.username,
+        cantidad: months,
+        kicker: `RESUB · ${months} MES${months === 1 ? '' : 'ES'}`,
+        detalle: 'sigue en la party',
+      };
+    }
     case 'bits':
       return {
         tipo: 'sub',
@@ -38,39 +64,42 @@ function toLiveAlert(detail: TwitchAlertEventDetail): LiveAlert {
         kicker: 'BITS',
         detalle: `${detail.amount ?? 0} BITS · GRACIAS`,
       };
-    case 'raid':
+    case 'raid': {
+      const viewers = detail.amount ?? 0;
       return {
-        tipo: 'seguidor',
+        tipo: 'raid',
         nombre: detail.username,
-        kicker: 'RAID',
-        detalle: `${detail.amount ?? 0} ESPECTADORES`,
+        cantidad: viewers,
+        kicker: `RAID · ${viewers}`,
+        detalle: 'llega con su gente',
       };
+    }
     case 'follow':
     default:
       return {
         tipo: 'seguidor',
         nombre: detail.username,
         kicker: 'NUEVO SEGUIDOR',
-        detalle: 'BIENVENIDO',
+        detalle: 'te sigue desde ahora',
       };
   }
 }
 
 export interface LiveAlertState {
   alert: LiveAlert | null;
-  /** True while the CRT power-off exit animation should be playing for `alert`. */
+  /** True while the exit animation should be playing for `alert`. */
   exiting: boolean;
 }
 
-/** Matches AlertBanner's `mint-alert-out` animation duration — the queue waits this
+/** Matches AlertBanner's `alert2-out` animation duration — the queue waits this
  * long after marking an alert as exiting before swapping in the next one. */
-const EXIT_MS = 350;
+const EXIT_MS = 300;
 
 /** Listens for the `twitchAlert` window events dispatched by `TwitchIntegration`
- * (follow/subscribe/bits/raid — see src/components/overlays/TwitchIntegration.tsx) and
- * queues them one at a time, each shown for `displayMs` then played out through a short
- * exit phase before the next one appears. Requires a `<TwitchBridge />` mounted on the
- * page to open the connection (or, for testing, any code dispatching the same
+ * (follow/subscribe/bits/raid/gift/resub — see src/components/overlays/TwitchIntegration.tsx)
+ * and queues them one at a time, each shown for `displayMs` then played out through a
+ * short exit phase before the next one appears. Requires a `<TwitchBridge />` mounted on
+ * the page to open the connection (or, for testing, any code dispatching the same
  * `twitchAlert` CustomEvent — see MintAlertTester). */
 export function useLiveAlerts(displayMs = 6000): LiveAlertState {
   const [state, setState] = useState<LiveAlertState>({ alert: null, exiting: false });

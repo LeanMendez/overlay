@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Jersey+25&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=DM+Mono:wght@400;500&display=swap');
 
 @layer base {
   body {
@@ -475,6 +476,94 @@
   }
   50% {
     opacity: 0.25;
+  }
+}
+
+/* Neo-brutal alert cards (Kit de alertas Twitch, ronda 2a) — used by AlertBanner
+   for follow/sub/gift/resub/raid. Kept separate from the mint-alert-* CRT
+   keyframes above, which no other screen references. */
+@keyframes alert2-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alert2-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes alert2-shadow {
+  0% {
+    box-shadow: 0 0 0 var(--sc);
+  }
+  100% {
+    box-shadow: 8px 8px 0 var(--sc);
+  }
+}
+
+@keyframes alert2-fill {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes alert2-bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes alert2-tick {
+  0% {
+    transform: rotate(0);
+  }
+  70% {
+    transform: rotate(-16deg) translateY(-3px);
+  }
+  100% {
+    transform: rotate(-11deg) translateY(-2px);
+  }
+}
+
+@keyframes alert2-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes alert2-creep {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-28px);
   }
 }
 
